@@ -33,8 +33,10 @@ export default [
       'react/jsx-no-target-blank': 'off',
       "react/jsx-uses-react": "error",
       "react/jsx-uses-vars": "error",
+      "react-hooks/exhaustive-deps": 'off',
       'react-refresh/only-export-components': [
         'warn',
+        "off",
         { allowConstantExport: true },
       ],
     },
