@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 
-const List = () => {
+const List = ({ token }) => {
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
@@ -12,6 +12,30 @@ const List = () => {
       console.log(response.data);
       if (response.data.success) {
         setList(response.data.products);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+
+  const removeProduct = async (id) => {
+    try {
+      const response = await axios.post(
+        backendUrl + "/api/product/remove",
+        { id },
+        {
+          headers: {
+            token,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        await fetchList();
       } else {
         toast.error(response.data.message);
       }
@@ -53,7 +77,10 @@ const List = () => {
               {currency}
               {item.price}
             </p>
-            <p className="text-right md:text-center cursor-pointer text-lg">
+            <p
+              onClick={() => removeProduct(item._id)}
+              className="text-right md:text-center cursor-pointer text-lg"
+            >
               X
             </p>
           </div>
