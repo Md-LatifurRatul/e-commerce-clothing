@@ -24,6 +24,10 @@ const App = () => {
       localStorage.removeItem("token");
     }
   }, [token]);
+
+  const userToken =
+    "eyJhbGciOiJIUzI1NiJ9.cnRsMTIzQGdtYWlsLmNvbWFiYzEyMw.FVYRH4LWs9KeBM9_hSjVwM5oIyLXtNCiAZNUijRSrVc";
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <ToastContainer />
@@ -38,18 +42,9 @@ const App = () => {
             <Sidebar />
             <div className="w-[70%] mx-auto ml-[max(5vw,12%)] my-8 text-gray-600 text-base">
               <Routes>
-                <Route
-                  path="/add"
-                  element={
-                    <Add
-                      token={
-                        "eyJhbGciOiJIUzI1NiJ9.cnRsMTIzQGdtYWlsLmNvbWFiYzEyMw.FVYRH4LWs9KeBM9_hSjVwM5oIyLXtNCiAZNUijRSrVc"
-                      }
-                    />
-                  }
-                />
-                <Route path="/list" element={<List token={token} />} />
-                <Route path="/orders" element={<Orders token={token} />} />
+                <Route path="/add" element={<Add token={userToken} />} />
+                <Route path="/list" element={<List token={userToken} />} />
+                <Route path="/orders" element={<Orders token={userToken} />} />
               </Routes>
             </div>
           </div>
